@@ -1,0 +1,50 @@
+name: MSS scanner
+
+on:
+  schedule:
+    # every 5 minutes, Sunday to Friday (times are UTC). Odd minutes avoid GitHub's busiest moments.
+    - cron: "3,8,13,18,23,28,33,38,43,48,53,58 * * * 0-5"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "test = send a status message now, scan = normal run"
+        required: true
+        default: "test"
+        type: choice
+        options:
+          - test
+          - scan
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mss-scanner
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Run the scanner
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 scanner.py ${{ github.event.inputs.mode || 'scan' }}
+
+      - name: Remember what was already sent
+        if: always()
+        run: |
+          if [ -f state.json ] && [ -n "$(git status --porcelain state.json)" ]; then
+            git config user.name "mss-bot"
+            git config user.email "mss-bot@users.noreply.github.com"
+            git add state.json
+            git commit -m "Update scanner state"
+            git push || echo "Could not save state this time"
+          fi
