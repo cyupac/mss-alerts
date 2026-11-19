@@ -37,10 +37,10 @@ SYMBOLS = ["XAU/USD"]
 TIMEFRAME = "15min"
 
 # Which setups to send: "A+" = A+ only, "A" = A+ and A, "B" = all
-QUALITY = "A"
+QUALITY = "B"
 
 # Your money (used for the lot size in the entry message)
-ACCOUNT_SIZE = 10000.0      # in USD
+ACCOUNT_SIZE = 5000.0      # in USD
 RISK_PCT = 1.0              # % of the account you lose if the stop is hit
 
 # Targets and trade management
