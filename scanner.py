@@ -34,7 +34,7 @@ from datetime import date, datetime, timedelta, timezone
 SYMBOLS = ["XAU/USD"]
 
 # Chart timeframe the scanner works on: "15min" (recommended) or "5min"
-TIMEFRAME = "15min"
+TIMEFRAME = "5min"
 
 # Which setups to send: "A+" = A+ only, "A" = A+ and A, "B" = all
 QUALITY = "B"
