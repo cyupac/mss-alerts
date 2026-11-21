@@ -55,7 +55,7 @@ DAY_STOP_R = 3.0            # stop for the day after losing this many R (0 = off
 ALERT_CHOCH = True          # graded CHoCH: get ready
 ALERT_ENTRY = True          # BUY / SELL entry with stop, targets, lot size
 ALERT_RESULT = True         # target 1 hit, trade closed
-ALERT_SIGNS = False         # key-level sweep and CISD (more messages)
+ALERT_SIGNS = True         # key-level sweep and CISD (more messages)
 
 # Filters
 USE_ROOM = True             # skip a trade when a key level blocks target 1
