@@ -31,7 +31,7 @@ from datetime import date, datetime, timedelta, timezone
 # Twelve Data symbols. With the free plan keep it to 2 symbols at most
 # (each symbol costs 1 credit per run, the free plan gives 800 a day).
 # Examples: "XAU/USD", "GBP/USD", "EUR/USD", "BTC/USD"
-SYMBOLS = ["XAU/USD"]
+SYMBOLS = ["XAU/USD", "GBP/USD", "BTC/USD"]
 
 # Chart timeframe the scanner works on: "15min" (recommended) or "5min"
 TIMEFRAME = "5min"
